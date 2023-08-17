@@ -11,6 +11,11 @@ yarn dev
 # or
 pnpm dev
 ```
+## How to migrate
+
+```
+npx prisma migrate dev --name init
+```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
