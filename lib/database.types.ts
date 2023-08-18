@@ -3,7 +3,7 @@ export type Json =
   | number
   | boolean
   | null
-  | { [key: string]: Json | undefined }
+  | { [key: string]: Json }
   | Json[]
 
 export interface Database {
@@ -34,38 +34,28 @@ export interface Database {
   }
   public: {
     Tables: {
-      _prisma_migrations: {
+      profiles: {
         Row: {
-          applied_steps_count: number
-          checksum: string
-          finished_at: string | null
+          avatar_url: string | null
+          email: string
           id: string
-          logs: string | null
-          migration_name: string
-          rolled_back_at: string | null
-          started_at: string
+          introduce: string | null
+          name: string | null
         }
         Insert: {
-          applied_steps_count?: number
-          checksum: string
-          finished_at?: string | null
+          avatar_url?: string | null
+          email: string
           id: string
-          logs?: string | null
-          migration_name: string
-          rolled_back_at?: string | null
-          started_at?: string
+          introduce?: string | null
+          name?: string | null
         }
         Update: {
-          applied_steps_count?: number
-          checksum?: string
-          finished_at?: string | null
+          avatar_url?: string | null
+          email?: string
           id?: string
-          logs?: string | null
-          migration_name?: string
-          rolled_back_at?: string | null
-          started_at?: string
+          introduce?: string | null
+          name?: string | null
         }
-        Relationships: []
       }
     }
     Views: {
@@ -117,14 +107,6 @@ export interface Database {
           public?: boolean | null
           updated_at?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "buckets_owner_fkey"
-            columns: ["owner"]
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
       }
       migrations: {
         Row: {
@@ -145,7 +127,6 @@ export interface Database {
           id?: number
           name?: string
         }
-        Relationships: []
       }
       objects: {
         Row: {
@@ -184,20 +165,6 @@ export interface Database {
           updated_at?: string | null
           version?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "objects_bucketId_fkey"
-            columns: ["bucket_id"]
-            referencedRelation: "buckets"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "objects_owner_fkey"
-            columns: ["owner"]
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
       }
     }
     Views: {
