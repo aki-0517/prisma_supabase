@@ -10,11 +10,41 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-   id        Int      @id @default(autoincrement())
-   title     String
-   content   String
-   createdAt DateTime @default(now()) @map("created_at")
+model Player {
+  id             Int              @id @default(autoincrement())
+  name           String
+  sex            String
+  sailNo         Int
+  iconUrl        String
+  createdAt      DateTime         @default(now()) @map("created_at")
+  PlayersOnGames PlayersOnGames[]
 
-   @@map("posts")
+  @@map("posts")
+}
+
+model Games {
+  id    Int              @id @default(autoincrement())
+  date  DateTime
+  games PlayersOnGames[]
+  Game  Game[]
+}
+
+model Game {
+  id      Int              @id @default(autoincrement())
+  Comment String
+  games   Games            @relation(fields: [gamesId], references: [id])
+  gamesId Int
+  players PlayersOnGames[]
+}
+
+model PlayersOnGames {
+  player   Player   @relation(fields: [playerId], references: [id])
+  playerId Int
+  game     Game     @relation(fields: [gameId], references: [id])
+  gameId   Int
+  madeAt   DateTime @default(now())
+  Games    Games?   @relation(fields: [gamesId], references: [id])
+  gamesId  Int?
+
+  @@id([playerId, gameId])
 }
