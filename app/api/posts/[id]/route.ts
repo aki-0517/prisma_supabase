@@ -9,13 +9,13 @@ export async function GET(
 ) {
   const id = Number(params.id);
 
-  const post = await prisma.post.findUnique({
+  const game = await prisma.game.findUnique({
     where: {
       id,
     },
   });
 
-  return NextResponse.json(post);
+  return NextResponse.json(game);
 }
 
 export async function PATCH(
@@ -23,15 +23,15 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   const id = Number(params.id);
-  const { title, content } = await request.json();
+  const { comment, players } = await request.json();
 
-  const post = await prisma.post.update({
+  const post = await prisma.game.update({
     where: {
       id,
     },
     data: {
-      title,
-      content,
+      comment,
+      players,
     },
   });
 
@@ -44,11 +44,11 @@ export async function DELETE(
 ) {
   const id = Number(params.id);
 
-  const post = await prisma.post.delete({
+  const game = await prisma.game.delete({
     where: {
       id,
     },
   });
 
-  return NextResponse.json(post);
+  return NextResponse.json(game);
 }
