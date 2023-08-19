@@ -24,16 +24,17 @@ model Player {
 
 model Games {
   id    Int              @id @default(autoincrement())
-  date  DateTime
+  madeAt   DateTime 
   games PlayersOnGames[]
   Game  Game[]
 }
 
 model Game {
   id      Int              @id @default(autoincrement())
-  Comment String
+  comment String
   games   Games            @relation(fields: [gamesId], references: [id])
   gamesId Int
+  madeAt   DateTime 
   players PlayersOnGames[]
 }
 
@@ -42,7 +43,6 @@ model PlayersOnGames {
   playerId Int
   game     Game     @relation(fields: [gameId], references: [id])
   gameId   Int
-  madeAt   DateTime @default(now())
   Games    Games?   @relation(fields: [gamesId], references: [id])
   gamesId  Int?
 
